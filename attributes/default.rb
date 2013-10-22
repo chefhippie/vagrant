@@ -31,13 +31,14 @@ default["vagrant"]["plugins"] = %w(
 )
 
 default["vagrant"]["version"] = "1.3.5"
-default["vagrant"]["package_url"] = "http://files.vagrantup.com/packages/a40522f5fabccb9ddabad03d836e120ff5d14093/#{node["vagrant"]["package_file"]}"
 
 case node["platform_family"]
 when "suse"
   default["vagrant"]["package_provider"] = Chef::Provider::Package::Rpm
   default["vagrant"]["package_file"] = "vagrant_#{node["vagrant"]["version"]}_x86_64.rpm"
+  default["vagrant"]["package_url"] = "http://files.vagrantup.com/packages/a40522f5fabccb9ddabad03d836e120ff5d14093/#{node["vagrant"]["package_file"]}"
 when "debian"
   default["vagrant"]["package_provider"] = Chef::Provider::Package::Apt
   default["vagrant"]["package_file"] = "vagrant_#{node["vagrant"]["version"]}_x86_64.deb"
+  default["vagrant"]["package_url"] = "http://files.vagrantup.com/packages/a40522f5fabccb9ddabad03d836e120ff5d14093/#{node["vagrant"]["package_file"]}"
 end

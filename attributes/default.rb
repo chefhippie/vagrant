@@ -19,8 +19,6 @@
 
 default["vagrant"]["plugins"] = %w(
   vbguest
-  lxc
-  docker
   libvirt
   berkshelf
   hostmanager

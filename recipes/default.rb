@@ -33,7 +33,7 @@ node["vagrant"]["plugins"].each do |name|
     action :run
 
     only_if do
-      `vagrant plugin list | grep vagrant-#{name}`.strip.empty?
+      `vagrant plugin list | grep vagrant-#{name} | wc -l`.strip == "0"
     end
   end
 end

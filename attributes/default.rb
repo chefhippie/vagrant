@@ -29,14 +29,14 @@ default["vagrant"]["plugins"] = %w(
 )
 
 default["vagrant"]["version"] = "1.3.5"
-
-case node["platform_family"]
-when "suse"
-  default["vagrant"]["package_provider"] = Chef::Provider::Package::Rpm
-  default["vagrant"]["package_file"] = "vagrant_#{node["vagrant"]["version"]}_x86_64.rpm"
-  default["vagrant"]["package_url"] = "http://files.vagrantup.com/packages/a40522f5fabccb9ddabad03d836e120ff5d14093/#{node["vagrant"]["package_file"]}"
-when "debian"
-  default["vagrant"]["package_provider"] = Chef::Provider::Package::Apt
-  default["vagrant"]["package_file"] = "vagrant_#{node["vagrant"]["version"]}_x86_64.deb"
-  default["vagrant"]["package_url"] = "http://files.vagrantup.com/packages/a40522f5fabccb9ddabad03d836e120ff5d14093/#{node["vagrant"]["package_file"]}"
-end
+default["vagrant"]["package_provider"] = value_for_platform_family(
+  "debian" => Chef::Provider::Package::Apt,
+  "ubuntu" => Chef::Provider::Package::Apt,
+  "suse" => Chef::Provider::Package::Zypper
+)
+default["vagrant"]["package_file"] = value_for_platform_family(
+  "debian" => "vagrant_#{node["vagrant"]["version"]}_x86_64.deb",
+  "ubuntu" => "vagrant_#{node["vagrant"]["version"]}_x86_64.deb",
+  "suse" => "vagrant_#{node["vagrant"]["version"]}_x86_64.rpm"
+)
+default["vagrant"]["package_url"] = "http://files.vagrantup.com/packages/a40522f5fabccb9ddabad03d836e120ff5d14093/#{node["vagrant"]["package_file"]}"

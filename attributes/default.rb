@@ -29,11 +29,6 @@ default["vagrant"]["plugins"] = %w(
 )
 
 default["vagrant"]["version"] = "1.3.5"
-default["vagrant"]["package_provider"] = value_for_platform_family(
-  "debian" => Chef::Provider::Package::Apt,
-  "ubuntu" => Chef::Provider::Package::Apt,
-  "suse" => Chef::Provider::Package::Zypper
-)
 default["vagrant"]["package_file"] = value_for_platform_family(
   "debian" => "vagrant_#{node["vagrant"]["version"]}_x86_64.deb",
   "ubuntu" => "vagrant_#{node["vagrant"]["version"]}_x86_64.deb",

@@ -18,7 +18,6 @@
 #
 
 default["vagrant"]["plugins"] = %w(
-  rake
   berkshelf
   omnibus
   ohai

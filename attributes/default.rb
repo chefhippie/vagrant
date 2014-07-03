@@ -18,20 +18,23 @@
 #
 
 default["vagrant"]["plugins"] = %w(
-  vbguest
-  libvirt
-  berkshelf
-  hostmanager
-  cachier
   rake
-  vbox-snapshot
-  sync
+  berkshelf
+  omnibus
+  ohai
+  libvirt
 )
 
-default["vagrant"]["version"] = "1.3.5"
+default["vagrant"]["mapping"] = {
+  "root" => "/root"
+}
+
+default["vagrant"]["version"] = "1.6.3"
+
 default["vagrant"]["package_file"] = value_for_platform_family(
   "debian" => "vagrant_#{node["vagrant"]["version"]}_x86_64.deb",
   "ubuntu" => "vagrant_#{node["vagrant"]["version"]}_x86_64.deb",
   "suse" => "vagrant_#{node["vagrant"]["version"]}_x86_64.rpm"
 )
-default["vagrant"]["package_url"] = "http://files.vagrantup.com/packages/a40522f5fabccb9ddabad03d836e120ff5d14093/#{node["vagrant"]["package_file"]}"
+
+default["vagrant"]["package_url"] = "https://dl.bintray.com/mitchellh/vagrant/#{node["vagrant"]["package_file"]}"

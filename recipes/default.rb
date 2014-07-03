@@ -34,12 +34,20 @@ when "suse"
 end
 
 node["vagrant"]["plugins"].each do |name|
-  execute "vagrant_plugin_#{name}" do
-    command "vagrant plugin install vagrant-#{name}"
-    action :run
+  node["vagrant"]["mapping"].each do |username, homedir|
+    execute "vagrant_plugin_#{name}_#{username}" do
+      command "vagrant plugin install vagrant-#{name}"
+      user username
 
-    only_if do
-      `vagrant plugin list | grep vagrant-#{name} | wc -l`.strip == "0"
+      action :run
+
+      environment(
+        "HOME" => homedir
+      )
+
+      only_if do
+        `vagrant plugin list | grep vagrant-#{name} | wc -l`.strip == "0"
+      end
     end
   end
 end

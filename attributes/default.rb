@@ -18,17 +18,17 @@
 #
 
 default["vagrant"]["plugins"] = %w(
-  berkshelf
+  librarian-chef
   omnibus
-  ohai
   libvirt
+  vbguest
 )
 
 default["vagrant"]["mapping"] = {
   "root" => "/root"
 }
 
-default["vagrant"]["version"] = "1.6.3"
+default["vagrant"]["version"] = "1.6.5"
 
 default["vagrant"]["package_file"] = value_for_platform_family(
   "debian" => "vagrant_#{node["vagrant"]["version"]}_x86_64.deb",

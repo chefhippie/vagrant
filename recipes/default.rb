@@ -22,21 +22,14 @@ remote_file ::File.join(Chef::Config[:file_cache_path], node["vagrant"]["package
   action :create_if_missing
 end
 
-case node["platform_family"]
-when "debian", "ubuntu"
-  dpkg_package ::File.join(Chef::Config[:file_cache_path], node["vagrant"]["package_file"]) do
-    action :install
-  end
-when "suse"
-  package ::File.join(Chef::Config[:file_cache_path], node["vagrant"]["package_file"]) do
-    action :install
-  end
+package ::File.join(Chef::Config[:file_cache_path], node["vagrant"]["package_file"]) do
+  action :install
 end
 
 node["vagrant"]["plugins"].each do |name|
   node["vagrant"]["mapping"].each do |username, homedir|
     execute "vagrant_plugin_#{name}_#{username}" do
-      command "vagrant plugin install vagrant-#{name}"
+      command "vagrant plugin install #{name}"
       user username
 
       action :run
@@ -46,7 +39,7 @@ node["vagrant"]["plugins"].each do |name|
       )
 
       only_if do
-        `vagrant plugin list | grep vagrant-#{name} | wc -l`.strip == "0"
+        `vagrant plugin list | grep #{name} | wc -l`.strip == "0"
       end
     end
   end

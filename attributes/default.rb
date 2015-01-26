@@ -22,6 +22,7 @@ default["vagrant"]["plugins"] = %w(
   vagrant-libvirt
   vagrant-vbguest
   vagrant-bindfs
+  vagrant-notify
   sahara
 )
 

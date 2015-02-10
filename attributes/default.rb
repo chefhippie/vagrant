@@ -18,11 +18,8 @@
 #
 
 default["vagrant"]["plugins"] = %w(
-  vagrant-librarian-chef
-  vagrant-libvirt
   vagrant-vbguest
   vagrant-bindfs
-  vagrant-notify
   sahara
 )
 
@@ -34,7 +31,6 @@ default["vagrant"]["version"] = "1.7.2"
 
 default["vagrant"]["package_file"] = value_for_platform_family(
   "debian" => "vagrant_#{node["vagrant"]["version"]}_x86_64.deb",
-  "ubuntu" => "vagrant_#{node["vagrant"]["version"]}_x86_64.deb",
   "suse" => "vagrant_#{node["vagrant"]["version"]}_x86_64.rpm"
 )
 

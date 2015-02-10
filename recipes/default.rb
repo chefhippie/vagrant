@@ -22,8 +22,15 @@ remote_file ::File.join(Chef::Config[:file_cache_path], node["vagrant"]["package
   action :create_if_missing
 end
 
-package ::File.join(Chef::Config[:file_cache_path], node["vagrant"]["package_file"]) do
-  action :install
+case node["platform_family"]
+when "debian"
+  dpkg_package ::File.join(Chef::Config[:file_cache_path], node["vagrant"]["package_file"]) do
+    action :install
+  end
+when "suse"
+  package ::File.join(Chef::Config[:file_cache_path], node["vagrant"]["package_file"]) do
+    action :install
+  end
 end
 
 node["vagrant"]["plugins"].each do |name|

@@ -51,7 +51,7 @@ node["vagrant"]["plugins"].each do |name|
             "#{homedir}/.vagrant.d/plugins.json"
           ).grep(
             /#{name}/
-          )
+          ).empty?
         else
           true
         end

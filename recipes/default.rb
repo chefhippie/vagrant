@@ -46,7 +46,7 @@ node["vagrant"]["plugins"].each do |name|
       )
 
       only_if do
-        if ::File.exist?
+        if ::File.exist? "#{homedir}/.vagrant.d/plugins.json"
           File.foreach(
             "#{homedir}/.vagrant.d/plugins.json"
           ).grep(

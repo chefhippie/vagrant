@@ -46,7 +46,15 @@ node["vagrant"]["plugins"].each do |name|
       )
 
       only_if do
-        `vagrant plugin list | grep #{name} | wc -l`.strip == "0"
+        if ::File.exist?
+          File.foreach(
+            "#{homedir}/.vagrant.d/plugins.json"
+          ).grep(
+            /#{name}/
+          )
+        else
+          true
+        end
       end
     end
   end

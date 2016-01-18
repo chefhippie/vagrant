@@ -34,4 +34,4 @@ default["vagrant"]["package_file"] = value_for_platform_family(
   "suse" => "vagrant_#{node["vagrant"]["version"]}_#{node["kernel"]["machine"]}.rpm"
 )
 
-default["vagrant"]["package_url"] = "https://dl.bintray.com/mitchellh/vagrant/#{node["vagrant"]["package_file"]}"
+default["vagrant"]["package_url"] = "https://releases.hashicorp.com/vagrant/#{node["vagrant"]["version"]}/#{node["vagrant"]["package_file"]}"

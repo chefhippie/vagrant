@@ -27,11 +27,11 @@ default["vagrant"]["mapping"] = {
   "root" => "/root"
 }
 
-default["vagrant"]["version"] = "1.7.4"
+default["vagrant"]["version"] = "1.8.1"
 
 default["vagrant"]["package_file"] = value_for_platform_family(
-  "debian" => "vagrant_#{node["vagrant"]["version"]}_x86_64.deb",
-  "suse" => "vagrant_#{node["vagrant"]["version"]}_x86_64.rpm"
+  "debian" => "vagrant_#{node["vagrant"]["version"]}_#{node["kernel"]["machine"]}.deb",
+  "suse" => "vagrant_#{node["vagrant"]["version"]}_#{node["kernel"]["machine"]}.rpm"
 )
 
 default["vagrant"]["package_url"] = "https://dl.bintray.com/mitchellh/vagrant/#{node["vagrant"]["package_file"]}"
